@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Масаж Черкаси | Катерина Чуднова | Навчання масажу та терапія</title>
+<meta name="description" content="Професійний масаж у Черкасах від Катерини Чуднової. Скульптурування тіла, лікувальний масаж спини, Face Lifting та навчання в Академії масажу. Запишіться на сеанс!">
+<meta name="keywords" content="масаж черкаси, курси масажу черкаси, навчання масажу, антицелюлітний масаж черкаси, масаж обличчя черкаси, Катерина Чуднова, масаж спини черкаси">
+
+<meta property="og:title" content="Масаж та Академія Катерини Чуднової | Черкаси">
+<meta property="og:description" content="Відновлення тіла та професійне навчання мистецтву дотику.">
+<meta property="og:image" content="head.JPG"> 
+<meta property="og:type" content="website">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <style>
+        /* --- CORE SETTINGS --- */
+        :root {
+            --bg-deep: #0a0a0a;
+            --bg-soft: #141414;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --burgundy: #700818;
+            --text-main: #EAEAEA;
+            --text-muted: #888888;
+            --font-body: 'Manrope', sans-serif;
+            --font-display: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            color: var(--gold);
+            line-height: 1.2;
+        }
+
+        .display-text {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: -0.02em;
+            background: linear-gradient(45deg, var(--gold), #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.4s ease; }
+
+        /* --- BUTTONS --- */
+        .btn-gold {
+            position: relative;
+            padding: 18px 40px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            background: transparent;
+            overflow: hidden;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: var(--gold);
+            z-index: -1;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn-gold:hover { color: #ddd; }
+        .btn-gold:hover::after { width: 100%; }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('head.webp') no-repeat center 30%;
+            background-size: cover;
+            filter: brightness(0.4);
+            transform: scale(1.1);
+            animation: zoomEffect 20s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- RUNNING LINE (TICKER) --- */
+        .ticker-wrap {
+            width: 100%;
+            background: var(--gold);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 15px 0;
+            transform: rotate(-2deg) scale(1.05);
+            margin: -30px 0;
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: ticker 20s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 1.5rem;
+            color: #000;
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* --- ABOUT (ASYMMETRIC) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper { position: relative; }
+        .about-image-wrapper img {
+            width: 100%;
+            display: block;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .about-image-wrapper:hover img { filter: grayscale(0%); }
+
+        .image-frame {
+            position: absolute;
+            top: -20px; left: -20px;
+            width: 100%; height: 100%;
+            border: 1px solid var(--gold);
+            z-index: -1;
+            transition: 0.5s;
+        }
+        .about-image-wrapper:hover .image-frame { top: 20px; left: 20px; }
+
+        .drop-cap {
+            float: left;
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 0.8;
+            color: var(--gold);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        /* --- PHILOSOPHY (PARALLAX) --- */
+        .philosophy {
+            background: fixed linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('philos.JPG');
+            background-size: cover;
+            background-position: center 10%;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .philosophy-quote {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .philosophy-quote::before {
+            content: '“';
+            font-family: var(--font-display);
+            font-size: 15rem;
+            color: var(--gold);
+            opacity: 0.1;
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .philosophy-text {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            line-height: 1.6;
+            font-family: var(--font-display);
+            color: #f5f5f5;
+            font-style: italic;
+        }
+
+        /* --- VIDEO STORY BLOCK --- */
+        .video-story {
+            background-color: #0f0f0f;
+            border-bottom: 1px solid #222;
+        }
+
+        .video-story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding: 10px;
+            border: 1px solid var(--gold);
+            background: #000;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            filter: brightness(0.9);
+            transition: 0.3s;
+        }
+        
+        .video-wrapper:hover video { filter: brightness(1); }
+
+        .video-text h3 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .video-text p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* --- TARGET AUDIENCE --- */
+        .target-section { background-color: var(--bg-soft); }
+        .target-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .target-item {
+            flex: 1;
+            min-width: 300px;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            transition: 0.3s;
+        }
+        .target-item:hover { border-color: var(--gold); }
+        .target-item h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .target-item i { color: var(--burgundy); font-size: 1.5rem; margin-bottom: 20px; display: block; }
+
+        /* --- ACADEMY (GLASS CARDS) --- */
+        .academy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .card-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: rgba(255,255,255,0.05);
+            position: absolute;
+            top: 10px; right: 20px;
+        }
+
+        .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+        .glass-card p { color: #aaa; margin-bottom: 30px; font-weight: 300; }
+        .price-tag { font-size: 1.4rem; color: var(--gold); font-family: var(--font-display); display: block; margin-top: auto; }
+
+        /* --- REVIEWS --- */
+        .review-card-premium {
+            background: #111;
+            padding: 40px;
+            border-left: 2px solid var(--gold);
+            position: relative;
+        }
+        .stars { color: var(--gold); margin-bottom: 15px; font-size: 0.9rem; }
+
+        /* --- BOOKING --- */
+        .booking-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
+        .booking-image { background: url('piska.jpg') center 70%; display: none; }
+        @media(min-width: 768px) { .booking-image { display: block; } }
+
+        .booking-form-wrapper {
+            background: #0f0f0f;
+            padding: 10% 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .styled-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .styled-input:focus { outline: none; border-bottom-color: var(--gold); }
+        select.styled-input option { background: #000; }
+
+        /* --- FOOTER --- */
+        .premium-footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 80px 0 40px;
+            background: #050505;
+            text-align: center;
+        }
+        .social-link { font-size: 1.5rem; margin: 0 15px; color: var(--text-muted); }
+        .social-link:hover { color: var(--gold); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .about-grid, .video-story-grid { grid-template-columns: 1fr; }
+            .about-image-wrapper, .video-wrapper { order: -1; margin-bottom: 30px; }
+            .booking-split { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content fade-up">
+            <h1 class="display-text">KATERYNA<br>CHUDNOVA</h1>
+            <p style="letter-spacing: 2px; text-transform: uppercase; color: var(--gold);">Масаж • Навчання • Коуч-супровід</p>
+            <a href="#booking" class="btn-gold">Отримати консультацію</a>
+        </div>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="about-grid">
+            <div class="about-text fade-up">
+                <div class="subtitle">Знайомство</div>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 40px;">Мистецтво<br>Дотику</h2>
+                <p>
+                    <span class="drop-cap">Я</span> створила простір, де час зупиняється. Мій підхід до масажу виходить за межі звичайної фізіології. Це симбіоз глибоких знань анатомії та інтуїтивного відчуття енергії.
+                </p>
+                <br>
+                <p style="color: var(--text-muted);">
+                    Я навчу тебе, відчувати тіло! Та розуміти його потреби. Засновниця студії та Академії, де народжуються нові майстри.
+                </p>
+                <a href="#academy" style="display:inline-block; margin-top: 40px; border-bottom: 1px solid var(--gold); padding-bottom: 5px; color: var(--gold);">Переглянути навчальні програми</a>
+            </div>
+            
+            <div class="about-image-wrapper fade-up">
+                <div class="image-frame"></div>
+                <img src="IMG_6883.JPG" alt="Катерина Чуднова" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy fade-up">
+        <div class="container">
+            <div class="subtitle" style="color: rgba(255,255,255,0.5);">Моя Філософія</div>
+            <div class="philosophy-quote">
+                <p class="philosophy-text">
+                    "Масаж — це діалог з тілом без слів. Я не лікую симптоми, я шукаю причини. Моя місія — повернути вам відчуття цілісності та гармонії."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-story fade-up">
+        <div class="container">
+            <div class="video-story-grid">
+                <div class="video-wrapper">
+                    <video controls poster="https://placehold.co/800x500/111/gold?text=Play+Video">
+                        <source src="nasite_compressed.mp4" type="video/mp4">
+                        Ваш браузер не підтримує відео.
+                    </video>
+                </div>
+
+                <div class="video-text">
+                    <div class="subtitle" style="text-align: left; margin-bottom: 20px;">За лаштунками</div>
+                    <h3>Живий процес відновлення</h3>
+                    <p>
+                        Краще один раз побачити, ніж сто разів почути. У цьому відео я відкриваю двері свого кабінету, щоб ви могли відчути атмосферу ще до візиту.
+                    </p>
+                    <p>
+                        Я розповідаю про нюанси технік, демонструю, як працюють мої руки, та ділюся тим, що зазвичай залишається "за кадром".
+                    </p>
+                    <div style="margin-top: 30px; display: flex; align-items: center; gap: 15px;">
+                        <i class="fa-solid fa-volume-high" style="color: var(--gold); font-size: 1.5rem;"></i>
+                        <span style="font-size: 0.9rem; color: #fff;">Увімкніть звук, щоб почути деталі</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="target-section">
+        <div class="container">
+            <h2 class="section-title fade-up">Для Кого</h2>
+            <div class="target-flex fade-up">
+                <div class="target-item">
+                    <i class="fa-solid fa-spa"></i>
+                    <h3>Клієнтам</h3>
+                    <p style="color: #aaa;">Відновлення ресурсу, та тілесно-емоційного балансу<br>
+-Нутриціологічний прийом <br>-Anti age терапія <br>-Програма індивідуального голодування </p>
+                </div>
+                <div class="target-item">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h3>Початківцям</h3>
+                    <p style="color: #aaa;">Старт кар'єри масажиста з нуля. Правильна постановка рук та глибока теорія.</p>
+                </div>
+                <div class="target-item">
+                    <i class="fa-solid fa-hands-holding-circle"></i>
+                    <h3>Майстрам</h3>
+                    <p style="color: #aaa;">Підвищення кваліфікації. Складні техніки, робота з тригерами та міофасціальний реліз.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="academy" class="container">
+        <div class="subtitle">Education</div>
+        <h2 class="section-title fade-up">Академія Майстерності</h2>
+        
+        <div class="academy-grid fade-up" style="margin-top: 60px;">
+            <div class="glass-card">
+                <span class="card-number">01</span>
+                <div>
+                    <h3>Базовий курс "Classic"</h3>
+                    <p>Фундамент професії. Анатомія, ергономіка, класичні техніки спини та шиї.</p>
+                </div>
+                <span class="price-tag">10 000 ₴</span>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">02</span>
+                <div>
+                    <h3>Скульптор Тіла</h3>
+                    <p>Корекція фігури. Антицелюлітні техніки, бамбукові палички, лімфодренаж.</p>
+                </div>
+                <span class="price-tag">8 500 ₴</span>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">03</span>
+                <div>
+                    <h3>Perfect Back (Лікувальний)</h3>
+                    <p>Робота з болем. Тригерні точки, м'язові блоки, глибоке пропрацювання.</p>
+                </div>
+                <span class="price-tag">6 000 ₴</span>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">04</span>
+                <div>
+                    <h3>Курс тазове дно</h3>
+                    <p>Рівень Профі. Вивчення тазових блоків, відновлення жінок після пологів.</p>
+                </div>
+                <span class="price-tag">6 000 ₴</span>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">05</span>
+                <div>
+                    <h3>Курс домашнього масажу.</h3>
+                    <p>Масаж для кожного. Не потрібно бути професійним масажистом щоб освоїти найпростіші техніки масажу</p>
+                </div>
+                <span class="price-tag">6 000 ₴</span>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">06</span>
+                <div>
+                    <h3>Face Lifting</h3>
+                    <p>Безопераційна підтяжка. Буккальний масаж, гуаша, міофасціальний реліз.</p>
+                </div>
+                <span class="price-tag">6 000 ₴</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="container fade-up">
+        <h2 class="section-title">Враження</h2>
+        <div class="academy-grid"> 
+            <div class="review-card-premium">
+                <div class="stars">★★★★★</div>
+                <p style="font-style: italic;">"Це не просто масаж, це якась магія. Біль у попереку, який мучив роками, зник за 3 сеанси."</p>
+                <div style="margin-top: 20px; color: var(--gold); font-family: var(--font-display);">— Андрій К.</div>
+            </div>
+            <div class="review-card-premium">
+                <div class="stars">★★★★★</div>
+                <p style="font-style: italic;">"Проходила навчання «З нуля». Катерина пояснює так доступно, що закохуєшся в анатомію."</p>
+                <div style="margin-top: 20px; color: var(--gold); font-family: var(--font-display);">— Ірина В.</div>
+            </div>
+            <div class="review-card-premium">
+                <div class="stars">★★★★★</div>
+                <p style="font-style: italic;">"Атмосфера салону на рівні найкращих готелів Європи. Дякую за цей оазис спокою."</p>
+                <div style="margin-top: 20px; color: var(--gold); font-family: var(--font-display);">— Олена М.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" style="padding: 0;">
+        <div class="booking-split">
+            <div class="booking-image"></div>
+            <div class="booking-form-wrapper">
+                <h2 style="color: #fff; margin-bottom: 10px;">Отримати консультацію</h2>
+                <p style="color: #888; margin-bottom: 40px;">Залиште контакти, ми подбаємо про решту.</p>
+                
+                <form id="tg-form">
+    <input type="text" id="name" class="styled-input" placeholder="Ваше ім'я" required>
+    <input type="tel" id="phone" class="styled-input" placeholder="Номер телефону" required>
+    <button type="submit" class="btn-gold" style="width: 100%; margin-top: 20px;">Підтвердити</button>
+</form>
+<div id="form-status" style="margin-top: 20px; color: var(--gold); display: none;">Дякуємо! Ми зв'яжемося з вами найближчим часом.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="premium-footer">
+        <div class="container">
+            <h2 style="font-size: 2rem; color: #fff; margin-bottom: 30px;">KATERYNA CHUDNOVA</h2>
+            
+            <div style="margin-bottom: 40px;">
+                <a href="https://www.instagram.com/chudnova.massage/" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/+380678902683" class="social-link"><i class="fa-brands fa-telegram"></i></a>
+                <a href="tel:+380938679205" class="social-link"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <p style="color: #555; font-size: 0.9rem;">
+                м. Черкаси, Вул. Дашковича, 34<br>
+                &copy; 2025 Всі права захищено.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+    <script>
+    const TOKEN = "8517799271:AAGzGJDrRia1bHX0Z6dTq2mQ-orT0v1j7hc";
+const CHAT_ID = "1001681443";
+const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+document.getElementById('tg-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    
+    // Формуємо текст повідомлення
+    let message = `<b>Заявка с сайта:</b>\n`;
+    message += `<b>Имя:</b> ${name}\n`;
+    message += `<b>Телефон:</b> ${phone}`;
+
+    axios.post(URI_API, {
+        chat_id: CHAT_ID,
+        parse_mode: 'html',
+        text: message
+    })
+    .then(res => {
+        this.reset(); // Очищуємо форму
+        document.getElementById('form-status').style.display = 'block';
+    })
+    .catch(err => {
+        console.warn(err);
+        alert('Сталася помилка. Спробуйте ще раз або зателефонуйте нам.');
+    });
+});
+    </script>
+</body>
+</html>
