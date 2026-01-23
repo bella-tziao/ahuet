@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Масаж Черкаси | Катерина Чуднова | Навчання масажу та терапія</title>
+<meta name="description" content="Професійний масаж у Черкасах від Катерини Чуднової. Скульптурування тіла, лікувальний масаж спини, Face Lifting та навчання в Академії масажу. Запишіться на сеанс!">
+<meta name="keywords" content="масаж черкаси, курси масажу черкаси, навчання масажу, антицелюлітний масаж черкаси, масаж обличчя черкаси, Катерина Чуднова, масаж спини черкаси">
+
+<meta property="og:title" content="Масаж та Академія Катерини Чуднової | Черкаси">
+<meta property="og:description" content="Відновлення тіла та професійне навчання мистецтву дотику.">
+<meta property="og:image" content="head.webp"> 
+<meta property="og:type" content="website">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <style>
+        /* --- CORE SETTINGS --- */
+        :root {
+            --bg-deep: #0a0a0a;
+            --bg-soft: #141414;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --burgundy: #700818;
+            --text-main: #EAEAEA;
+            --text-muted: #888888;
+            --font-body: 'Manrope', sans-serif;
+            --font-display: 'Playfair Display', serif;
+            /* Exclusive Colors */
+            --ex-red: #ff3344;
+            --ex-dark-red: #4a040e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            color: var(--gold);
+            line-height: 1.2;
+        }
+
+        .display-text {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: -0.02em;
+            background: linear-gradient(45deg, var(--gold), #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.4s ease; }
+
+        /* --- BUTTONS --- */
+        .btn-gold {
+            position: relative;
+            padding: 18px 40px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            background: transparent;
+            overflow: hidden;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            cursor: pointer;
+        }
+
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: var(--gold);
+            z-index: -1;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn-gold:hover { color: #ddd; }
+        .btn-gold:hover::after { width: 100%; }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('head.webp') no-repeat center 30%;
+            background-size: cover;
+            filter: brightness(0.4);
+            transform: scale(1.1);
+            animation: zoomEffect 20s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- RUNNING LINE (TICKER) --- */
+        .ticker-wrap {
+            width: 100%;
+            background: var(--gold);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 15px 0;
+            transform: rotate(-2deg) scale(1.05);
+            margin: -30px 0;
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: ticker 20s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 1.5rem;
+            color: #000;
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* --- ABOUT (ASYMMETRIC) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper { position: relative; }
+        .about-image-wrapper img {
+            width: 100%;
+            display: block;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .about-image-wrapper:hover img { filter: grayscale(0%); }
+
+        .image-frame {
+            position: absolute;
+            top: -20px; left: -20px;
+            width: 100%; height: 100%;
+            border: 1px solid var(--gold);
+            z-index: -1;
+            transition: 0.5s;
+        }
+        .about-image-wrapper:hover .image-frame { top: 20px; left: 20px; }
+
+        .drop-cap {
+            float: left;
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 0.8;
+            color: var(--gold);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        /* --- PHILOSOPHY (PARALLAX) --- */
+        .philosophy {
+            background: fixed linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('philos.webp');
+            background-size: cover;
+            background-position: center 10%;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .philosophy-quote {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .philosophy-quote::before {
+            content: '“';
+            font-family: var(--font-display);
+            font-size: 15rem;
+            color: var(--gold);
+            opacity: 0.1;
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .philosophy-text {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            line-height: 1.6;
+            font-family: var(--font-display);
+            color: #f5f5f5;
+            font-style: italic;
+        }
+
+        /* --- VIDEO STORY BLOCK --- */
+        .video-story {
+            background-color: #0f0f0f;
+            border-bottom: 1px solid #222;
+        }
+
+        .video-story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding: 10px;
+            border: 1px solid var(--gold);
+            background: #000;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            filter: brightness(0.9);
+            transition: 0.3s;
+        }
+        
+        .video-wrapper:hover video { filter: brightness(1); }
+
+        .video-text h3 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .video-text p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* --- TARGET AUDIENCE --- */
+        .target-section { background-color: var(--bg-soft); }
+        .target-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .target-item {
+            flex: 1;
+            min-width: 300px;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            transition: 0.3s;
+        }
+        .target-item:hover { border-color: var(--gold); }
+        .target-item h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .target-item i { color: var(--burgundy); font-size: 1.5rem; margin-bottom: 20px; display: block; }
+
+        /* --- ACADEMY (GLASS CARDS) --- */
+        .academy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .card-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: rgba(255,255,255,0.05);
+            position: absolute;
+            top: 10px; right: 20px;
+        }
+
+        .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+        .glass-card p { color: #aaa; margin-bottom: 30px; font-weight: 300; }
+        .price-tag { font-size: 1.4rem; color: var(--gold); font-family: var(--font-display); display: block; margin-top: auto; }
+
+        /* --- REVIEWS --- */
+        .review-card-premium {
+            background: #111;
+            padding: 40px;
+            border-left: 2px solid var(--gold);
+            position: relative;
+        }
+        .stars { color: var(--gold); margin-bottom: 15px; font-size: 0.9rem; }
+
+        /* --- BOOKING --- */
+        .booking-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
+        .booking-image { background: url('foot.webp') center 70%; display: none; }
+        @media(min-width: 768px) { .booking-image { display: block; } }
+
+        .booking-form-wrapper {
+            background: #0f0f0f;
+            padding: 10% 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .styled-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .styled-input:focus { outline: none; border-bottom-color: var(--gold); }
+        select.styled-input option { background: #000; }
+
+        /* --- FOOTER --- */
+        .premium-footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 80px 0 40px;
+            background: #050505;
+            text-align: center;
+        }
+        .social-link { font-size: 1.5rem; margin: 0 15px; color: var(--text-muted); }
+        .social-link:hover { color: var(--gold); }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active { display: flex; opacity: 1; }
+
+        .modal-window {
+            background: #141414;
+            border: 1px solid var(--gold);
+            padding: 40px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .modal-overlay.active .modal-window { transform: translateY(0); }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 2rem; color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+        }
+        .close-modal:hover { color: var(--gold); }
+
+        .modal-title {
+            font-family: var(--font-display);
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .modal-body {
+            color: #ddd;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-details {
+            margin-top: auto;
+            display: inline-block;
+            padding: 10px 25px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-details:hover { background: var(--gold); color: #000; }
+
+        /* --- NEW RED EXCLUSIVE SECTION STYLES --- */
+        .exclusive-massages-section {
+            background: radial-gradient(circle at center, #200408 0%, #0a0a0a 100%);
+            padding: 140px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(112, 8, 24, 0.4);
+            border-bottom: 1px solid rgba(112, 8, 24, 0.4);
+        }
+
+        .exclusive-massages-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .exclusive-massages-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            background: linear-gradient(to bottom, #ff3344, #700818);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .exclusive-massages-section .subtitle {
+            font-size: 1.1rem;
+            color: #cc9999;
+            margin-bottom: 80px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 2px;
+            text-transform: none;
+        }
+
+        .exclusive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .exclusive-card {
+            background: rgba(15, 5, 5, 0.7);
+            border: 1px solid var(--ex-dark-red);
+            padding: 50px 35px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .exclusive-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--ex-red);
+            box-shadow: 0 0 40px rgba(255, 0, 34, 0.25);
+            background: rgba(30, 5, 8, 0.85);
+        }
+
+        .exclusive-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ex-red), transparent);
+            transform: scaleX(0);
+            transition: transform 0.6s ease;
+        }
+
+        .exclusive-card:hover::after { transform: scaleX(1); }
+
+        .exclusive-card h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--ex-red);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .exclusive-card p {
+            font-size: 1rem;
+            color: #dcdcdc;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .exclusive-card .btn-details {
+            border: 1px solid var(--burgundy);
+            color: var(--ex-red);
+            background: transparent;
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            align-self: flex-start;
+        }
+
+        .exclusive-card:hover .btn-details {
+            background: var(--burgundy);
+            color: #fff;
+            border-color: var(--ex-red);
+            box-shadow: 0 0 20px rgba(255, 51, 68, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .about-grid, .video-story-grid { grid-template-columns: 1fr; }
+            .about-image-wrapper, .video-wrapper { order: -1; margin-bottom: 30px; }
+            .booking-split { grid-template-columns: 1fr; }
+            .exclusive-massages-section h2 { font-size: 2.5rem; }
+            .exclusive-card { padding: 35px 25px; }
+        }
+
+        /* Стиль для новых надписей BASIC/PROFI */
+        .course-badge-base {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(21, 250, 0, 0.4);
+            padding: 4px 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+            color: chartreuse;
+        }
+
+        .course-badge-pro {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(212, 55, 71, 0.4);
+            padding: 4px 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+            color:rgba(255, 44, 44, 0.3)
+        }
+
+        .course-badge-medium {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 4px 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content fade-up">
+            <h1 class="display-text">KATERYNA<br>CHUDNOVA</h1>
+            <p style="letter-spacing: 2px; text-transform: uppercase; color: var(--gold);">Навчання • Коуч-супровід • Масаж</p>
+            <a href="#booking" class="btn-gold">Отримати консультацію</a>
+        </div>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+            <div class="ticker-item">Relaxation • Healing • Education • Perfection • </div>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="about-grid">
+            <div class="about-text fade-up">
+                <div class="subtitle">Знайомство</div>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 40px;">Мистецтво<br>Дотику</h2>
+                <p>
+                    <span class="drop-cap">Я</span> створила простір, де час зупиняється. Мій підхід до масажу виходить за межі звичайної фізіології. Це симбіоз глибоких знань анатомії та інтуїтивного відчуття енергії.
+                </p>
+                <br>
+                <p style="color: var(--text-muted);">
+                    Я навчу тебе, відчувати тіло! Та розуміти його потреби. Засновниця студії та Академії, де народжуються нові майстри.
+                </p>
+                <a href="#academy" style="display:inline-block; margin-top: 40px; border-bottom: 1px solid var(--gold); padding-bottom: 5px; color: var(--gold);">Переглянути навчальні програми</a>
+            </div>
+            
+            <div class="about-image-wrapper fade-up">
+                <div class="image-frame"></div>
+                <img src="whoami.webp" alt="Катерина Чуднова" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy fade-up">
+        <div class="container">
+            <div class="subtitle" style="color: rgba(255,255,255,0.5);">Моя Філософія</div>
+            <div class="philosophy-quote">
+                <p class="philosophy-text">
+                    "Масаж — це діалог з тілом без слів. Я не лікую симптоми, я шукаю причини. Моя місія — повернути вам відчуття цілісності та гармонії."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-story fade-up">
+        <div class="container">
+            <div class="video-story-grid">
+                <div class="video-wrapper">
+                    <video controls poster="https://placehold.co/800x500/111/gold?text=Play+Video">
+                        <source src="nasite_compressed.mp4" type="video/mp4">
+                        Ваш браузер не підтримує відео.
+                    </video>
+                </div>
+
+                <div class="video-text">
+                    <div class="subtitle" style="text-align: left; margin-bottom: 20px;">За лаштунками</div>
+                    <h3>Живий процес відновлення</h3>
+                    <p>
+                        Краще один раз побачити, ніж сто разів почути. У цьому відео я відкриваю двері свого кабінету, щоб ви могли відчути атмосферу ще до візиту.
+                    </p>
+                    <p>
+                        Я розповідаю про нюанси технік, демонструю, як працюють мої руки, та ділюся тим, що зазвичай залишається "за кадром".
+                    </p>
+                    <div style="margin-top: 30px; display: flex; align-items: center; gap: 15px;">
+                        <i class="fa-solid fa-volume-high" style="color: var(--gold); font-size: 1.5rem;"></i>
+                        <span style="font-size: 0.9rem; color: #fff;">Увімкніть звук, щоб почути деталі</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="target-section">
+        <div class="container">
+            <h2 class="section-title fade-up">Для Кого</h2>
+            <div class="target-flex fade-up">
+                <div class="target-item">
+                    <i class="fa-solid fa-spa"></i>
+                    <h3>Клієнтам</h3>
+                    <p style="color: #aaa;">Відновлення ресурсу, та тілесно-емоційного балансу<br>
+-Нутриціологічний прийом <br>-Anti age терапія <br>-Програма індивідуального голодування </p>
+                </div>
+                <div class="target-item">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h3>Початківцям</h3>
+                    <p style="color: #aaa;">Старт кар'єри масажиста з нуля. Правильна постановка рук та глибока теорія.</p>
+                </div>
+                <div class="target-item">
+                    <i class="fa-solid fa-hands-holding-circle"></i>
+                    <h3>Майстрам</h3>
+                    <p style="color: #aaa;">Підвищення кваліфікації. Складні техніки, робота з тригерами та міофасціальний реліз.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="academy" class="container">
+        <div class="subtitle">Education</div>
+        <h2 class="section-title fade-up">Академія Майстерності</h2>
+        
+        <div class="academy-grid fade-up" style="margin-top: 60px;">
+    
+            <div class="glass-card">
+            
+                <span class="card-number">01</span>
+                <div>
+                    <span class="course-badge-base">BASIC</span>
+                    <h3>Основи класичного масажу, діагностика в масажних техніках</h3>
+                    <p>Ідеальний для старту та вдосконалення навичок. Вивчення анатомії, ергономіка майстра, постановка рук, базові та продвинуті техніки масажу по тілу.</p>
+                    <div class="hidden-content" style="display:none;">
+                        <h4 style="color: var(--gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">Програма курсу (44 години)</h4>
+                        <div style="margin-bottom: 20px;">
+                            <p><strong>1. Анатомія масажиста (6 годин)</strong></p>
+                            <p style="color: #aaa; font-size: 0.9em; margin-bottom: 5px;">Вивчення мʼязової топографії, функції мʼязів:</p>
+                            <ul style="padding-left: 20px; color: #aaa; font-size: 0.9em; list-style-type: circle;">
+                                <li>Спина, Таз, Ноги</li>
+                                <li>Голова, обличчя, Шия</li>
+                            </ul>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>2. Шкіра та засоби (2 години)</strong></p>
+                            <p style="color: #aaa; font-size: 0.9em;">Будова та функції шкіри, рецепторний апарат. Розбір засобів для масажу.</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>3. Лімфатична система (6 годин)</strong></p>
+                            <p style="color: #aaa; font-size: 0.9em;">Анатомія, функції, лімфодренажний масаж. Абдомінальний масаж.</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>4. Антицелюлітний блок (4 години)</strong></p>
+                            <p style="color: #aaa; font-size: 0.9em;">Поняття про ожиріння, робота гепатобіліарної системи. Будова жирової клітини.</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>5. Нервова та судинна системи (6 годин)</strong></p>
+                            <ul style="padding-left: 20px; color: #aaa; font-size: 0.9em; list-style-type: circle;">
+                                <li>Робота при судинній сітці</li>
+                                <li>Вплив масажу на судини</li>
+                                <li>Нейроседативні та релакс масажі</li>
+                            </ul>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>6. Масаж спини (6 годин)</strong></p>
+                            <p style="color: #aaa; font-size: 0.9em;">Діагностика: трігери, міозит, спаєчні процеси. Атонія та гіпертонус.</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>7. Інші зони (14 годин сумарно)</strong></p>
+                            <ul style="padding-left: 20px; color: #aaa; font-size: 0.9em; list-style-type: circle;">
+                                <li>Масаж шиї, голови, обличчя (4 год)</li>
+                                <li>Грудні мʼязи, діафрагма, живіт, руки (4 год)</li>
+                                <li>Стопи, ноги, мʼязи тазового поясу (6 год)</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 20px; border: 1px solid var(--gold); margin-top: 30px;">
+                            <h4 style="color: var(--gold); margin-bottom: 15px;">Вартість навчання:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Групове навчання:</span><strong style="color: #fff;">26 000 ₴</strong></li>
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Раннє бронювання:</span><strong style="color: var(--gold);">24 000 ₴</strong></li>
+                                <li style="margin-bottom: 0; display: flex; justify-content: space-between; border-top: 1px solid #444; padding-top: 10px;"><span>Індивідуально:</span><strong style="color: #fff;">46 000 ₴</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-details">Дізнатись більше</button>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">02</span>
+                <div>
+                                        <span class="course-badge-pro">PROFI</span>
+                    <h3>Скульптор Тіла</h3>
+                    <p>Просунутий рівень для корекції фігури. Антицелюлітні програми масажу, бамбукові палички, блейди, динамічні техніки та лімфодренаж. Вакуумний масаж, комбінація з апаратними методиками та ін'єкціями ліполітичних препаратів. Абдомінальний масаж живота.</p>
+                    <div class="hidden-content" style="display:none;">
+                        <h4 style="color: var(--gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">Програма курсу (20 годин)</h4>
+                        <div style="margin-bottom: 15px;"><p><strong>1. Фізіологія схуднення (6 годин)</strong></p><p style="color: #aaa; font-size: 0.9em;">Анатомія та фізіологія роботи лімфатичної та гепатобіліарної систем.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>2. Робота з жировою клітиною (6 годин)</strong></p><p style="color: #aaa; font-size: 0.9em;">Техніки для роботи з <strong>адипоцитом</strong>. Принципи зменшення кількості та покращення якості жирової клітковини.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>3. Комбінована терапія (2 години)</strong></p><p style="color: #aaa; font-size: 0.9em;">Поєднання ручного масажу з апаратними та ін'єкційними методиками для максимального результату.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>4. Протоколи та діагностика (2 години)</strong></p><p style="color: #aaa; font-size: 0.9em;">Розгляд шаблону для складання індивідуальної програми корекції фігури під клієнта.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>5. Запуск метаболізму (4 години)</strong></p><p style="color: #aaa; font-size: 0.9em;">Техніка <strong>точково-абдомінального масажу</strong> як старт для запуску процесів схуднення та обміну речовин.</p></div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 20px; border: 1px solid var(--gold); margin-top: 30px;">
+                            <h4 style="color: var(--gold); margin-bottom: 15px;">Вартість навчання:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Групове навчання:</span><strong style="color: #fff;">12 000 ₴</strong></li>
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Раннє бронювання:</span><strong style="color: var(--gold);">10 000 ₴</strong></li>
+                                <li style="margin-bottom: 0; display: flex; justify-content: space-between; border-top: 1px solid #444; padding-top: 10px;"><span>Індивідуально:</span><strong style="color: #fff;">22 000 ₴</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-details">Дізнатись больше</button>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">03</span>
+                <div>
+                    <span class="course-badge-pro">PROFI</span>
+                    <h3>Perfect Back (Лікувальний)</h3>
+                    <p>Рівень Профі. Навчання роботи з тригерними точками, міофасціальними дисфункціями та м'язовими блоками які найчастіше зустрічаються в роботі майстра лікувального масажу.</p>
+                    <div class="hidden-content" style="display:none;">
+                        <h4 style="color: var(--gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">Програма курсу (24 години)</h4>
+                        <div style="margin-bottom: 15px;"><p><strong>1. Глибока біомеханіка (6 годин)</strong></p><p style="color: #aaa; font-size: 0.9em;">Детальне вивчення фасціальної анатомії та взаємозв'язків у тілі.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>2. Патологія болю (4 години)</strong></p><p style="color: #aaa; font-size: 0.9em;">Вплив фасціальних блоків на больовий синдром.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>3. Остеопатичний підхід (6 годин)</strong></p><p style="color: #aaa; font-size: 0.9em;">Техніка роботи з фасціями (MFR) та м'які мануальні мобілізації.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>4. Складні синдроми (8 годин)</strong></p><ul style="padding-left: 20px; color: #aaa; font-size: 0.9em; list-style-type: circle;"><li>Робота з тригерними точками</li><li>Постуральна діагностика</li></ul></div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 20px; border: 1px solid var(--gold); margin-top: 30px;">
+                            <h4 style="color: var(--gold); margin-bottom: 15px;">Вартість навчання:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Групове навчання:</span><strong style="color: #fff;">16 000 ₴</strong></li>
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Раннє бронювання:</span><strong style="color: var(--gold);">14 500 ₴</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-details">Дізнатись більше</button>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">04</span>
+                <div>
+                    <span class="course-badge-pro">PROFI</span>
+                    <h3>Тотальний ліфтинг обличчя</h3>
+                    <p>Рівень Профі. Безопераційна підтяжка. Міофасціальний реліз, буккальний масаж та гуаша. Глибокі техніки масажу обличчя, лімфодренажний масаж обличчя, масаж голови.</p>
+                    <div class="hidden-content" style="display:none;">
+                        <h4 style="color: var(--gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">Програма курсу (24 години)</h4>
+                        <div style="margin-bottom: 15px;"><p><strong>1. Основи та підготовка (4 години)</strong></p><p style="color: #aaa; font-size: 0.9em;">Будова шкіри, розбір космецевтики: ампули, сироватки, пілінги.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>2. Лімфодренажний блок (6 годин)</strong></p><p style="color: #aaa; font-size: 0.9em;">Лімфатична система: анатомія та функції.</p></div>
+                        <div style="margin-bottom: 15px;"><p><strong>3. Спеціальні техніки (4 години)</strong></p><p style="color: #aaa; font-size: 0.9em;">Інтраоральний та буккальний масаж.</p></div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 20px; border: 1px solid var(--gold); margin-top: 30px;">
+                            <h4 style="color: var(--gold); margin-bottom: 15px;">Вартість навчання:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Групове навчання:</span><strong style="color: #fff;">14 000 ₴</strong></li>
+                                <li style="margin-bottom: 10px; display: flex; justify-content: space-between;"><span>Раннє бронювання:</span><strong style="color: var(--gold);">12 000 ₴</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-details">Дізнатись більше</button>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">05</span>
+                <div>
+                    <span class="course-badge-medium">MEDIUM</span>
+                    <h3>Курс тазове дно</h3>
+                    <p>Рівень Профі. Вивчення тазових блоків, відновлення жінок після пологів, робота з мязами тазового дна як основи сексуального здоров'я, профілактика эректильної дисфункції.</p>
+                    <div class="hidden-content" style="display:none;">
+                        <p>Інтимне здоров'я та професійний масаж тазового дна для відновлення та профілактики.</p>
+                        <p>Вартість: 6 000 ₴</p>
+                    </div>
+                </div>
+                <button class="btn-details">Дізнатись більше</button>
+            </div>
+
+            <div class="glass-card">
+                <span class="card-number">06</span>
+                <div>
+                    <span class="course-badge-base">BASIC</span>
+                    <h3>Курс домашнього масажу</h3>
+                    <p>Масаж для кожного. Не потрібно бути професійним масажистом щоб освоїти найпростіші техніки масажу для зняття напруги з м'язів ваших коханих і дітей</p>
+                    <div class="hidden-content" style="display:none;">
+                        <p>Навчання базовим розслаблюючим технікам для використання у колі сім'ї.</p>
+                        <p>Вартість: 6 000 ₴</p>
+                    </div>
+                </div>
+                <button class="btn-details">Дізнатись більше</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="exclusive-massages" class="exclusive-massages-section">
+        <div class="container">
+            <h2 class="fade-up">Exclusive Touch</h2>
+            <p class="subtitle fade-up">
+                Територія абсолютної довіри та пробудження прихованих почуттів. Відкрийте глибину своєї сексуальності через сакральні практики та естетику дотику.
+            </p>
+
+            <div class="exclusive-grid">
+                
+                <div class="exclusive-card fade-up">
+                    <h3>Еротичний масаж</h3>
+                    <p>
+                        Мистецтво зваблення через дотик. Гармонійне поєднання ніжності та пристрасті, що знімає всі тілесні блоки та дарує емоційне вивільнення.
+                    </p>
+                    <div class="hidden-content" style="display:none;">
+                        <p style="margin-bottom:15px;">Це глибока сенсорна практика, де майстер використовує не лише руки, а й все тіло для створення безперервного потоку задоволення.</p>
+                        <p><strong>Ціна:</strong> Індивідуально</p>
+                    </div>
+                    <button class="btn-details">Відчути більше</button>
+                </div>
+
+                <div class="exclusive-card fade-up">
+                    <h3>Масаж Лінгама</h3>
+                    <p>
+                        Стародавня чоловіча практика для розширення меж чуттєвості. Дозволяє досягти піку розслаблення та переосмислити власну енергію.
+                    </p>
+                    <div class="hidden-content" style="display:none;">
+                        <p style="margin-bottom:15px;">Тантрична техніка, спрямована на глибоке опрацювання чоловічої енергії, зняття сексуальної напруги та зміцнення здоров'я.</p>
+                        <p><strong>Ціна:</strong> Індивідуально</p>
+                    </div>
+                    <button class="btn-details">Відчути більше</button>
+                </div>
+
+                <div class="exclusive-card fade-up">
+                    <h3>Масаж Йоні</h3>
+                    <p>
+                        Сакральна жіноча практика самопізнання. Повертає відчуття власної привабливості, розкриває чуттєвий потенціал та внутрішнє світло.
+                    </p>
+                    <div class="hidden-content" style="display:none;">
+                        <p style="margin-bottom:15px;">Медитативний та надзвичайно дбайливий масаж, що допомагає жінці з'єднатися зі своїм тілом та зцілити емоційні травми.</p>
+                        <p><strong>Ціна:</strong> Індивідуально</p>
+                    </div>
+                    <button class="btn-details">Відчути більше</button>
+                </div>
+
+                <div class="exclusive-card fade-up">
+                    <h3>Тантрична подорож</h3>
+                    <p>
+                        Повний ритуал занурення в енергетику тіла. Від кінчиків пальців ніг до маківки — кожна клітина вашого тіла почне дихати задоволенням.
+                    </p>
+                    <div class="hidden-content" style="display:none;">
+                        <p style="margin-bottom:15px;">Комплексна практика, що включає роботу з диханням, енергетичними центрами та чуттєвий масаж всього тіла.</p>
+                        <p><strong>Ціна:</strong> Індивідуально</p>
+                    </div>
+                    <button class="btn-details">Відчути більше</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="container fade-up">
+        <h2 class="section-title">Враження</h2>
+        <div class="academy-grid"> 
+            <div class="review-card-premium">
+                <div class="stars">★★★★★</div>
+                <p style="font-style: italic;">"Це не просто масаж, це якась магія. Біль у попереку, який мучив роками, зник за 3 сеанси."</p>
+                <div style="margin-top: 20px; color: var(--gold); font-family: var(--font-display);">— Андрій К.</div>
+            </div>
+            <div class="review-card-premium">
+                <div class="stars">★★★★★</div>
+                <p style="font-style: italic;">"Проходила навчання «З нуля». Катерина пояснює так доступно, що закохуєшся в анатомію."</p>
+                <div style="margin-top: 20px; color: var(--gold); font-family: var(--font-display);">— Ірина В.</div>
+            </div>
+            <div class="review-card-premium">
+                <div class="stars">★★★★★</div>
+                <p style="font-style: italic;">"Атмосфера салону на рівні найкращих готелів Європи. Дякую за цей оазис спокою."</p>
+                <div style="margin-top: 20px; color: var(--gold); font-family: var(--font-display);">— Олена М.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" style="padding: 0;">
+        <div class="booking-split">
+            <div class="booking-image"></div>
+            <div class="booking-form-wrapper">
+                <h2 style="color: #fff; margin-bottom: 10px;">Отримати консультацію</h2>
+                <p style="color: #888; margin-bottom: 40px;">Залиште контакти, ми подбаємо про решту.</p>
+                <form id="tg-form">
+                    <input type="text" id="name" class="styled-input" placeholder="Ваше ім'я" required>
+                    <input type="tel" id="phone" class="styled-input" placeholder="Номер телефону" required>
+                    <button type="submit" class="btn-gold" style="width: 100%; margin-top: 20px;">Підтвердити</button>
+                </form>
+                <div id="form-status" style="margin-top: 20px; color: var(--gold); display: none;">Дякуємо! Ми зв'яжемося з вами найближчим часом.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="premium-footer">
+        <div class="container">
+            <h2 style="font-size: 2rem; color: #fff; margin-bottom: 30px;">KATERYNA CHUDNOVA</h2>
+            <div style="margin-bottom: 40px;">
+                <a href="https://www.instagram.com/chudnova.massage/" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/+380678902683" class="social-link"><i class="fa-brands fa-telegram"></i></a>
+                <a href="tel:+380938679205" class="social-link"><i class="fa-solid fa-phone"></i></a>
+            </div>
+            <p style="color: #555; font-size: 0.9rem;">
+                м. Черкаси, Вул. Дашковича, 34<br>
+                &copy; 2025 Всі права захищено.
+            </p>
+        </div>
+    </footer>
+
+    <div id="course-modal" class="modal-overlay">
+        <div class="modal-window">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-title" class="modal-title">Назва</h3>
+            <div id="modal-desc" class="modal-body"></div>
+            <a href="#booking" class="btn-gold" onclick="closeModal()">Записатись</a>
+        </div>
+    </div>
+
+    <script>
+        // Animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Telegram Logic
+        const TOKEN = "8517799271:AAGzGJDrRia1bHX0Z6dTq2mQ-orT0v1j7hc";
+        const CHAT_ID = "1001681443";
+        const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+        document.getElementById('tg-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            let message = `<b>Заявка с сайта:</b>\n<b>Имя:</b> ${name}\n<b>Телефон:</b> ${phone}`;
+            axios.post(URI_API, { chat_id: CHAT_ID, parse_mode: 'html', text: message })
+            .then(res => { this.reset(); document.getElementById('form-status').style.display = 'block'; })
+            .catch(err => { alert('Помилка. Спробуйте ще раз.'); });
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('course-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const closeBtn = document.querySelector('.close-modal');
+        
+        document.querySelectorAll('.btn-details').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.glass-card, .exclusive-card');
+                const title = card.querySelector('h3').innerText;
+                const description = card.querySelector('.hidden-content').innerHTML;
+                modalTitle.innerText = title;
+                modalDesc.innerHTML = description;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    </script>
+
+</body>
+</html>
